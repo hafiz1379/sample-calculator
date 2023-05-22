@@ -45,7 +45,9 @@ function deleteDigit() {
 
 function calculateResult() {
   try {
-    const result = eval(displayValue);
+    const numbers = displayValue.split(/[+\-*/]/).map(Number);
+    const operators = displayValue.match(/[+\-*/]/g);
+    const result = calculate(numbers, operators);
     displayValue = result.toString();
     isResultShown = true;
     updateDisplay();
@@ -53,6 +55,34 @@ function calculateResult() {
     displayValue = "";
     document.getElementById("display").value = "Error";
   }
+}
+
+function calculate(numbers, operators) {
+  let result = numbers[0];
+
+  for (let i = 0; i < operators.length; i++) {
+    const operator = operators[i];
+    const nextNumber = numbers[i + 1];
+
+    switch (operator) {
+      case "+":
+        result += nextNumber;
+        break;
+      case "-":
+        result -= nextNumber;
+        break;
+      case "*":
+        result *= nextNumber;
+        break;
+      case "/":
+        result /= nextNumber;
+        break;
+      default:
+        throw new Error("Invalid operator");
+    }
+  }
+
+  return result;
 }
 
 function updateDisplay() {
@@ -64,7 +94,7 @@ document.addEventListener("keydown", function(event) {
 
   if (/\d/.test(key)) {
     appendNumber(key);
-  } else if (key === "." && !isResultShown && !displayValue.includes(".")) {
+  } else if (key === "." && !isResultShown && canAppendDecimal()) {
     appendDecimal();
   } else if (key === "+" || key === "-" || key === "*" || key === "/") {
     performOperation(key);
@@ -74,3 +104,9 @@ document.addEventListener("keydown", function(event) {
     deleteDigit();
   }
 });
+
+function canAppendDecimal() {
+  const operands = displayValue.split(/[+\-*/]/);
+  const currentOperand = operands[operands.length - 1];
+  return !currentOperand.includes(".");
+}
