@@ -1,6 +1,6 @@
 .calculator {
     width: 300px;
-    margin: 0 auto;
+    margin: 80px auto;
     padding: 20px;
     background-color: #f5f5f5;
     border-radius: 8px;
@@ -8,7 +8,7 @@
   }
   
   #display {
-    width: 100%;
+    width: 93%;
     margin-bottom: 15px;
     padding: 10px;
     font-size: 20px;
