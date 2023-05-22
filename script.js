@@ -15,6 +15,11 @@ function clearDisplay() {
   updateDisplay();
 }
 
+function deleteDigit() {
+  displayValue = displayValue.slice(0, -1);
+  updateDisplay();
+}
+
 function calculateResult() {
   try {
     const result = eval(displayValue);
@@ -39,7 +44,11 @@ document.addEventListener("keydown", function(event) {
     performOperation(key);
   } else if (key === "Enter") {
     calculateResult();
-  } else if (key === "Escape") {
-    clearDisplay();
+  } else if (key === "Backspace") {
+    if (displayValue.length === 0) {
+      clearDisplay();
+    } else {
+      deleteDigit();
+    }
   }
 });
