@@ -64,7 +64,7 @@ document.addEventListener("keydown", function(event) {
 
   if (/\d/.test(key)) {
     appendNumber(key);
-  } else if (key === "." && !displayValue.includes(".")) {
+  } else if (key === "." && !isResultShown && !displayValue.includes(".")) {
     appendDecimal();
   } else if (key === "+" || key === "-" || key === "*" || key === "/") {
     performOperation(key);
