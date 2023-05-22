@@ -35,11 +35,19 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
   }
+
+  .operation {
+    background-color: #4caf50;
+  }
   
   button:hover {
     background-color: #d4d4d4;
   }
   
+  .operation:hover {
+    background-color: #2c892f;
+  } 
+
   button:active {
     background-color: #ccc;
   }
@@ -63,4 +71,6 @@
   .button-equal:hover {
     background-color: #388e3c;
   }
+
+  
   
