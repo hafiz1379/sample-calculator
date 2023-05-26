@@ -19,12 +19,12 @@
       <button onclick="appendNumber('1')">1</button>
       <button onclick="appendNumber('2')">2</button>
       <button onclick="appendNumber('3')">3</button>
-      <button class="operation" onclick="performOperation('*')">*</button>
+      <button class="operation" onclick="performOperation('*')">x</button>
       <button onclick="appendNumber('0')">0</button>
       <button onclick="appendDecimal('.')">.</button>
-      <button class="operation" onclick="clearDisplay()">C</button>
-      <button class="operation" onclick="performOperation('/')">/</button>
       <button class="operation" onclick="calculateResult()">=</button>
+      <button class="operation" onclick="performOperation('/')">/</button>
+      <button id="delete" class="operation" onclick="clearDisplay()">C</button>
     </div>
   </div>
   <script src="script.js"></script>
