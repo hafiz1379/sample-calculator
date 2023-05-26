@@ -100,7 +100,7 @@ Run this command:
 
 ```sh
   cd my-folder
-  git clone https://github.com/hafiz1379/Hello-Microverse.git
+  git clone https://github.com/hafiz1379/sample-calculator.git
 ```
 
 ### Install
