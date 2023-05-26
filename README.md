@@ -7,7 +7,7 @@
   <img src="./77.png" alt="logo" width="140"  height="auto" />
   <br/>
 
-  <h3><b>FIFA World Cup 2022</b></h3>
+  <h3><b>Sample  Calculator</b></h3>
 
 </div>
 
@@ -37,9 +37,9 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 Portfolio Desktop Version <a name="about-project"></a>
+# 📖 Sample  Calculator <a name="about-project"></a>
 
-> This is my First Capstone project! created it by using HTML, CSS and JavaScript.
+> This is my Sample  Calculator project! created it by using HTML, CSS and JavaScript.
 
 ## 🛠 Built With <a name="built-with"></a>
 
