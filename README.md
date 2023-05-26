@@ -74,8 +74,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-This is the [live demo link](https://hafiz1379.github.io/1st-module-capstone-project/)
-In this [video](https://www.loom.com/share/f182cd06a0ac474894bea04a1d6978ec) I share a live view of my project while also talking about the creation
+This is the [live demo link](https://hafiz1379.github.io/sample-calculator/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -177,16 +176,6 @@ If you like this project just give it a star.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGEMENTS -->
-
-## 🙏 Acknowledgments <a name="acknowledgements"></a>
-
-I would like to thank Microverse to have this opportunity, and also thank you the code review team. 
-
-Original design idea by [Cindy Shin in Behance](https://www.behance.net/adagio07).
-
-The original design is under [Creative Commons license of the design](https://creativecommons.org/licenses/by-nc/4.0/).
-
-Multimedia and content changes were made in this project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
