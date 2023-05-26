@@ -1,76 +1,79 @@
 .calculator {
-    width: 300px;
-    margin: 80px auto;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  #display {
-    width: 93%;
-    margin-bottom: 15px;
-    padding: 10px;
-    font-size: 20px;
-    text-align: left;
-    border: none;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-  }
-  
-  .keypad {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-  }
-  
-  button {
-    padding: 20px;
-    font-size: 18px;
-    border: none;
-    background-color: #e0e0e0;
-    color: #333;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
+  width: 300px;
+  margin: 80px auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-  .operation {
-    background-color: #4caf50;
-  }
-  
-  button:hover {
-    background-color: #d4d4d4;
-  }
-  
-  .operation:hover {
-    background-color: #2c892f;
-  } 
+#display {
+  width: 93%;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 20px;
+  text-align: left;
+  border: none;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
 
-  button:active {
-    background-color: #ccc;
-  }
-  
-  .button-clear {
-    grid-column: span 2;
-    background-color: #ff7043;
-    color: #fff;
-  }
-  
-  .button-clear:hover {
-    background-color: #ff5722;
-  }
-  
-  .button-equal {
-    grid-column: span 2;
-    background-color: #4caf50;
-    color: #fff;
-  }
-  
-  .button-equal:hover {
-    background-color: #388e3c;
-  }
+.keypad {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
-  
-  
+button {
+  flex-basis: calc(25% - 10px);
+  padding: 20px;
+  font-size: 18px;
+  border: none;
+  background-color: #e0e0e0;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 10px;
+}
+
+.operation {
+  background-color: #4caf50;
+}
+
+button:hover {
+  background-color: #d4d4d4;
+}
+
+.operation:hover {
+  background-color: #2c892f;
+}
+
+button:active {
+  background-color: #ccc;
+}
+
+.button-clear {
+  flex-basis: calc(50% - 10px);
+  background-color: #ff7043;
+  color: #fff;
+}
+
+.button-clear:hover {
+  background-color: #ff5722;
+}
+
+.button-equal {
+  flex-basis: calc(50% - 10px);
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.button-equal:hover {
+  background-color: #388e3c;
+}
+
+#delete {
+  width: 100%;
+}
