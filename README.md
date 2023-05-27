@@ -152,8 +152,8 @@ Hafizullah Rasa
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- Creating all the remaining sites 
-- Adding more functionality
+- Responsive Design: The calculator is designed to be responsive, adapting to different screen sizes and devices.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
