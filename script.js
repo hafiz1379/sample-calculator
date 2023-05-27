@@ -1,9 +1,13 @@
-let displayValue = "";
+let displayValue = '';
 let isResultShown = false;
+
+function updateDisplay() {
+  document.getElementById('display').value = displayValue;
+}
 
 function appendNumber(number) {
   if (isResultShown) {
-    displayValue = "";
+    displayValue = '';
     isResultShown = false;
   }
   displayValue += number;
@@ -12,10 +16,10 @@ function appendNumber(number) {
 
 function appendDecimal() {
   if (isResultShown) {
-    displayValue = "0.";
+    displayValue = '0.';
     isResultShown = false;
-  } else if (!displayValue.includes(".")) {
-    displayValue += ".";
+  } else if (!displayValue.includes('.')) {
+    displayValue += '.';
   }
   updateDisplay();
 }
@@ -29,7 +33,7 @@ function performOperation(operator) {
 }
 
 function clearDisplay() {
-  displayValue = "";
+  displayValue = '';
   updateDisplay();
 }
 
@@ -52,16 +56,16 @@ function calculateResult() {
     isResultShown = true;
     updateDisplay();
   } catch (error) {
-    displayValue = "";
-    document.getElementById("display").value = "Error";
+    displayValue = '';
+    document.getElementById('display').value = 'Error';
   }
 }
 
 function calculate(numbers, operators) {
   // Perform multiplication and division operations first
   for (let i = 0; i < operators.length; i++) {
-    if (operators[i] === "*" || operators[i] === "/") {
-      const result = operators[i] === "*" ? numbers[i] * numbers[i + 1] : numbers[i] / numbers[i + 1];
+    if (operators[i] === '*' || operators[i] === '/') {
+      const result = operators[i] === '*' ? numbers[i] * numbers[i + 1] : numbers[i] / numbers[i + 1];
       numbers.splice(i, 2, result);
       operators.splice(i, 1);
       i--; // Decrement the index to account for the removed operator
@@ -75,36 +79,32 @@ function calculate(numbers, operators) {
     const nextNumber = numbers[i + 1];
 
     switch (operator) {
-      case "+":
+      case '+':
         result += nextNumber;
         break;
-      case "-":
+      case '-':
         result -= nextNumber;
         break;
       default:
-        throw new Error("Invalid operator");
+        throw new Error('Invalid operator');
     }
   }
 
   return result;
 }
 
-function updateDisplay() {
-  document.getElementById("display").value = displayValue;
-}
-
-document.addEventListener("keydown", function(event) {
-  const key = event.key;
+document.addEventListener('keydown', (event) => {
+  const { key } = event;
 
   if (/\d/.test(key)) {
     appendNumber(key);
-  } else if (key === "." && !isResultShown && canAppendDecimal()) {
+  } else if (key === '.' && !isResultShown && canAppendDecimal()) {
     appendDecimal();
-  } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+  } else if (key === '+' || key === '-' || key === '*' || key === '/') {
     performOperation(key);
-  } else if (key === "Enter") {
+  } else if (key === 'Enter') {
     calculateResult();
-  } else if (key === "Backspace") {
+  } else if (key === 'Backspace') {
     deleteDigit();
   }
 });
@@ -112,5 +112,5 @@ document.addEventListener("keydown", function(event) {
 function canAppendDecimal() {
   const operands = displayValue.split(/[+\-*/]/);
   const currentOperand = operands[operands.length - 1];
-  return !currentOperand.includes(".");
+  return !currentOperand.includes('.');
 }
