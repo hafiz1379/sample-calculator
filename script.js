@@ -1,6 +1,6 @@
 let displayValue = '';
 let isResultShown = false;
-let history = [];
+const history = [];
 
 function updateDisplay() {
   document.getElementById('display').value = displayValue;
@@ -8,7 +8,13 @@ function updateDisplay() {
 
 function updateHistory() {
   const historyElement = document.getElementById('history');
-  historyElement.innerHTML = history.map(entry => `<div>${entry}</div>`).join('');
+  historyElement.innerHTML = history.map((entry) => `<div>${entry}</div>`).join('');
+}
+
+function canAppendDecimal() {
+  const operands = displayValue.split(/[+\-*/]/);
+  const currentOperand = operands[operands.length - 1];
+  return !currentOperand.includes('.');
 }
 
 function appendNumber(number) {
@@ -24,7 +30,7 @@ function appendDecimal() {
   if (isResultShown) {
     displayValue = '0.';
     isResultShown = false;
-  } else if (!displayValue.includes('.')) {
+  } else if (canAppendDecimal()) {
     displayValue += '.';
   }
   updateDisplay();
@@ -53,40 +59,20 @@ function deleteDigit() {
   }
 }
 
-function calculateResult() {
-  try {
-    const expression = displayValue;
-    const numbers = displayValue.split(/[+\-*/]/).map(Number);
-    const operators = displayValue.match(/[+\-*/]/g);
-    const result = calculate(numbers, operators);
-    displayValue = result.toString();
-    isResultShown = true;
-    updateDisplay();
-
-    // Update history
-    const historyEntry = `${expression} = ${result}`;
-    history.push(historyEntry);
-    updateHistory();
-  } catch (error) {
-    displayValue = '';
-    document.getElementById('display').value = 'Error';
-  }
-}
-
 function calculate(numbers, operators) {
   // Perform multiplication and division operations first
-  for (let i = 0; i < operators.length; i++) {
+  for (let i = 0; i < operators.length; i += 1) {
     if (operators[i] === '*' || operators[i] === '/') {
       const result = operators[i] === '*' ? numbers[i] * numbers[i + 1] : numbers[i] / numbers[i + 1];
       numbers.splice(i, 2, result);
       operators.splice(i, 1);
-      i--; // Decrement the index to for the removed operator
+      i -= 1; // Decrement the index to for the removed operator
     }
   }
 
   // Perform addition and subtraction operations
   let result = numbers[0];
-  for (let i = 0; i < operators.length; i++) {
+  for (let i = 0; i < operators.length; i += 1) {
     const operator = operators[i];
     const nextNumber = numbers[i + 1];
 
@@ -105,22 +91,24 @@ function calculate(numbers, operators) {
   return result;
 }
 
-function performUnaryOperation(operation) {
-  if (isResultShown) {
-    isResultShown = false;
-  }
-  const numbers = displayValue.split(/[+\-*/]/).map(Number);
-  const operators = displayValue.match(/[+\-*/]/g);
-  const lastNumber = numbers[numbers.length - 1];
-  const result = calculateUnaryOperation(lastNumber, operation);
-  displayValue = displayValue.slice(0, -lastNumber.toString().length) + result.toString();
-  isResultShown = true;
-  updateDisplay();
+function calculateResult() {
+  try {
+    const expression = displayValue;
+    const numbers = displayValue.split(/[+\-*/]/).map(Number);
+    const operators = displayValue.match(/[+\-*/]/g);
+    const result = calculate(numbers, operators);
+    displayValue = result.toString();
+    isResultShown = true;
+    updateDisplay();
 
-  // Update history
-  const historyEntry = `${operation}(${lastNumber}) = ${result}`;
-  history.push(historyEntry);
-  updateHistory();
+    // Update history
+    const historyEntry = `${expression} = ${result}`;
+    history.push(historyEntry);
+    updateHistory();
+  } catch (error) {
+    displayValue = '';
+    document.getElementById('display').value = 'Error';
+  }
 }
 
 function calculateUnaryOperation(value, operation) {
@@ -147,6 +135,23 @@ function calculateUnaryOperation(value, operation) {
   return result;
 }
 
+function performUnaryOperation(operation) {
+  if (isResultShown) {
+    isResultShown = false;
+  }
+  const numbers = displayValue.split(/[+\-*/]/).map(Number);
+  const lastNumber = numbers[numbers.length - 1];
+  const result = calculateUnaryOperation(lastNumber, operation);
+  displayValue = displayValue.slice(0, -lastNumber.toString().length) + result.toString();
+  isResultShown = true;
+  updateDisplay();
+
+  // Update history
+  const historyEntry = `${operation}(${lastNumber}) = ${result}`;
+  history.push(historyEntry);
+  updateHistory();
+}
+
 document.addEventListener('keydown', (event) => {
   const { key } = event;
 
@@ -166,9 +171,3 @@ document.addEventListener('keydown', (event) => {
     performUnaryOperation('log');
   }
 });
-
-function canAppendDecimal() {
-  const operands = displayValue.split(/[+\-*/]/);
-  const currentOperand = operands[operands.length - 1];
-  return !currentOperand.includes('.');
-}
