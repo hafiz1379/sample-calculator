@@ -1,8 +1,14 @@
 let displayValue = '';
 let isResultShown = false;
+let history = [];
 
 function updateDisplay() {
   document.getElementById('display').value = displayValue;
+}
+
+function updateHistory() {
+  const historyElement = document.getElementById('history');
+  historyElement.innerHTML = history.map(entry => `<div>${entry}</div>`).join('');
 }
 
 function appendNumber(number) {
@@ -49,12 +55,18 @@ function deleteDigit() {
 
 function calculateResult() {
   try {
+    const expression = displayValue;
     const numbers = displayValue.split(/[+\-*/]/).map(Number);
     const operators = displayValue.match(/[+\-*/]/g);
     const result = calculate(numbers, operators);
     displayValue = result.toString();
     isResultShown = true;
     updateDisplay();
+
+    // Update history
+    const historyEntry = `${expression} = ${result}`;
+    history.push(historyEntry);
+    updateHistory();
   } catch (error) {
     displayValue = '';
     document.getElementById('display').value = 'Error';
@@ -68,7 +80,7 @@ function calculate(numbers, operators) {
       const result = operators[i] === '*' ? numbers[i] * numbers[i + 1] : numbers[i] / numbers[i + 1];
       numbers.splice(i, 2, result);
       operators.splice(i, 1);
-      i--; // Decrement the index to account for the removed operator
+      i--; // Decrement the index to for the removed operator
     }
   }
 
@@ -97,10 +109,18 @@ function performUnaryOperation(operation) {
   if (isResultShown) {
     isResultShown = false;
   }
-  const result = calculateUnaryOperation(displayValue, operation);
-  displayValue = result.toString();
+  const numbers = displayValue.split(/[+\-*/]/).map(Number);
+  const operators = displayValue.match(/[+\-*/]/g);
+  const lastNumber = numbers[numbers.length - 1];
+  const result = calculateUnaryOperation(lastNumber, operation);
+  displayValue = displayValue.slice(0, -lastNumber.toString().length) + result.toString();
   isResultShown = true;
   updateDisplay();
+
+  // Update history
+  const historyEntry = `${operation}(${lastNumber}) = ${result}`;
+  history.push(historyEntry);
+  updateHistory();
 }
 
 function calculateUnaryOperation(value, operation) {
