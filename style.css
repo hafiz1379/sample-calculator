@@ -25,6 +25,11 @@
   justify-content: space-between;
 }
 
+#history {
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+
 button {
   width: 70px;
   margin: 2px;
