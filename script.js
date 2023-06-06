@@ -93,6 +93,40 @@ function calculate(numbers, operators) {
   return result;
 }
 
+function performUnaryOperation(operation) {
+  if (isResultShown) {
+    isResultShown = false;
+  }
+  const result = calculateUnaryOperation(displayValue, operation);
+  displayValue = result.toString();
+  isResultShown = true;
+  updateDisplay();
+}
+
+function calculateUnaryOperation(value, operation) {
+  const number = parseFloat(value);
+  let result;
+
+  switch (operation) {
+    case 'sqrt':
+      if (number < 0) {
+        throw new Error('Invalid input for square root');
+      }
+      result = Math.sqrt(number);
+      break;
+    case 'log':
+      if (number <= 0) {
+        throw new Error('Invalid input for logarithm');
+      }
+      result = Math.log10(number);
+      break;
+    default:
+      throw new Error('Invalid unary operation');
+  }
+
+  return result;
+}
+
 document.addEventListener('keydown', (event) => {
   const { key } = event;
 
@@ -106,6 +140,10 @@ document.addEventListener('keydown', (event) => {
     calculateResult();
   } else if (key === 'Backspace') {
     deleteDigit();
+  } else if (key === 'r' || key === 'R') {
+    performUnaryOperation('sqrt');
+  } else if (key === 'l' || key === 'L') {
+    performUnaryOperation('log');
   }
 });
 
