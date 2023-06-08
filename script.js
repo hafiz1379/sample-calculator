@@ -171,4 +171,3 @@ document.addEventListener('keydown', (event) => {
     performUnaryOperation('log');
   }
 });
-
